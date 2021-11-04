@@ -1,0 +1,19 @@
+on: [pull_request]
+
+jobs:
+  hello_world_job:
+    runs-on: ubuntu-latest
+    name: A job to say hello
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+      - name: random-assign
+        id: random-assign
+        uses: ./
+        # uses: Table-project-app/pr-task-runner
+        with:
+          reviewers: "['hotsukai']"
+          github-token: '${{ secrets.GITHUB_TOKEN }}'
+      # Use the output from the `hello` step
+      - name: Get the output time
+        run: echo "The Reviewer is ${{ steps.random-assign.outputs.reviewer }}"
