@@ -1,11 +1,12 @@
 const core = require("@actions/core");
 const github = require("@actions/github");
+const { Octokit } = require("@octokit/rest");
 
 async function run() {
   try {
     const pullRequestNumber = github.context.payload.number;
     const token = core.getInput("github-token");
-    const octokit = github.getOctokit(token);
+    const octokit = new Octokit({auth:token})
     const reviewers = JSON.parse(core.getInput("reviewers"));
 
     const reviewer = reviewers[Math.floor(Math.random() * reviewers.length)];
