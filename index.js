@@ -9,10 +9,14 @@ async function run() {
     const pullRequestNumber = github.context.payload.number;
     const token = core.getInput("github-token");
     const octokit = new Octokit({auth:token})
-    const reviewers = JSON.parse(core.getInput("reviewers"));
-
-    const reviewer = reviewers[Math.floor(Math.random() * reviewers.length)];
+    let reviewers = JSON.parse(core.getInput("reviewers"));
     
+    console.log(`reviewers ${core.getInput("reviewers")}`)
+    const author = github.context.payload.sender.login
+    console.log(`author ${github.context.payload.sender.login}`);
+    reviewers = reviewers.filter(r=>r!==author)
+    const reviewer = reviewers[Math.floor(Math.random() * reviewers.length)];
+
     await octokit.pulls.requestReviewers({
       owner: github.context.repo.owner,
       repo: github.context.repo.repo,
