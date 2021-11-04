@@ -5,6 +5,7 @@ const { Octokit } = require("@octokit/rest");
 async function run() {
   try {
     const payload = JSON.stringify(github.context.payload, undefined, 2);
+    console.log(`DEBUG : ${payload}`);
     const pullRequestNumber = github.context.payload.number;
     const token = core.getInput("github-token");
     const octokit = new Octokit({auth:token})
@@ -20,7 +21,6 @@ async function run() {
     });
 
     
-    console.log(`DEBUG : ${payload}`);
     core.setOutput("reviewer", reviewer);
   } catch (error) {
     core.setFailed(error.message);
