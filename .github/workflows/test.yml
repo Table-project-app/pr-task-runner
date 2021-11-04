@@ -1,4 +1,4 @@
-on: [pull_request]
+on: [pull_request, push]
 
 jobs:
   hello_world_job:
@@ -12,7 +12,7 @@ jobs:
         uses: ./
         # uses: Table-project-app/pr-task-runner
         with:
-          reviewers: "['hotsukai']"
+          reviewers: '["hotsukai"]'
           github-token: '${{ secrets.GITHUB_TOKEN }}'
       # Use the output from the `hello` step
       - name: Get the output time
