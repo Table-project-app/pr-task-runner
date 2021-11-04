@@ -1,0 +1,16 @@
+name: 'PR Reviewer Auto Assign'
+description: 'Set reviewer to PR'
+inputs:
+  reviewers: 
+    description: "String of list"
+    required: true
+    default: '[]'
+  github-token:
+    description: "GitHub token"
+    required: true
+outputs:
+  reviewer: 
+    description: 'reviewer account name'
+runs:
+  using: 'node12'
+  main: 'index.js'
