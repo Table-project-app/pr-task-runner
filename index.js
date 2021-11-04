@@ -5,8 +5,9 @@ async function run() {
   try {
     const pullRequestNumber = github.context.payload.number;
     const token = core.getInput("github-token");
+    const octokit = github.getOctokit(token);
     const reviewers = JSON.parse(core.getInput("reviewers"));
-    
+
     const reviewer = reviewers[Math.floor(Math.random() * reviewers.length)];
     
     await octokit.pulls.requestReviewers({
